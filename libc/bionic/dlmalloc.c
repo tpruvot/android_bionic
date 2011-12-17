@@ -466,6 +466,7 @@ DEFAULT_MMAP_THRESHOLD       default: 256K
 */
 
 #ifdef ANDROID
+#define USE_BUILTIN_FFS 1
 #ifdef __arm__
 #include <machine/cpu-features.h>
 #endif
