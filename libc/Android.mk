@@ -359,12 +359,16 @@ libc_common_src_files += \
 	arch-arm/bionic/memset.S \
 	arch-arm/bionic/setjmp.S \
 	arch-arm/bionic/sigsetjmp.S \
-	arch-arm/bionic/strlen.c.arm \
 	arch-arm/bionic/strcpy.S \
 	arch-arm/bionic/strcmp.S \
 	arch-arm/bionic/syscall.S \
 	string/strncmp.c \
 	unistd/socketcalls.c
+ifeq ($(ARCH_ARM_HAVE_ARMV7A),false)
+libc_common_src_files += arch-arm/bionic/strlen-armv7.S
+else
+libc_common_src_files += arch-arm/bionic/strlen.c.arm
+endif
 
 # Check if we want a neonized version of memmove instead of the
 # current ARM version
@@ -493,6 +497,10 @@ libc_common_cflags := \
 		-DUSE_DL_PREFIX \
 		-DPOSIX_MISTAKE \
                 -DLOG_ON_HEAP_ERROR \
+
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+libc_common_cflags += -DQCOM_HARDWARE
+endif
 
 # these macro definitions are required to implement the
 # 'timezone' and 'daylight' global variables, as well as
