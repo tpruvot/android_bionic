@@ -38,9 +38,6 @@
 #define PAGE_SIZE 4096
 #define PAGE_MASK 4095
 
-#define likely(expr)   __builtin_expect (expr, 1)
-#define unlikely(expr) __builtin_expect (expr, 0)
-
 void debugger_init();
 const char *addr_to_name(unsigned addr);
 
@@ -165,11 +162,7 @@ struct soinfo
 extern soinfo libdl_info;
 
 /* these must all be powers of two */
-#ifdef ARCH_SH
-#define LIBBASE 0x60000000
-#define LIBLAST 0x70000000
-#define LIBINC  0x00100000
-#elif defined(VM_SPLIT_2G)
+#ifdef VM_SPLIT_2G
 #define LIBBASE 0x40000000
 #define LIBLAST 0x50000000
 #define LIBINC  0x00100000

@@ -389,6 +389,11 @@ dl_iterate_phdr(int (*cb)(struct dl_phdr_info *info, size_t size, void *data),
 }
 #endif
 
+
+#ifndef likely
+#define likely(x) __builtin_expect(!!(x),1)
+#endif
+
 static Elf32_Sym *_gnu_hash_lookup(soinfo *si, unsigned gnu_hash, const char *name)
 {
     Elf32_Sym *s;
