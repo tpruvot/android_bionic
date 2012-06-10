@@ -113,14 +113,6 @@ struct soinfo
     unsigned *bucket;
     unsigned *chain;
 
-    /* GNU-style hash table infos */
-    unsigned gnu_nbucket;
-    unsigned gnu_shift;
-    unsigned gnu_bitmask_words;
-    unsigned *gnu_bitmask;
-    unsigned *gnu_bucket;
-    unsigned *gnu_chain;
-
     unsigned *plt_got;
 
     Elf32_Rel *plt_rel;
@@ -160,17 +152,6 @@ struct soinfo
 
 
 extern soinfo libdl_info;
-
-/* these must all be powers of two */
-#ifdef VM_SPLIT_2G
-#define LIBBASE 0x40000000
-#define LIBLAST 0x50000000
-#define LIBINC  0x00100000
-#else
-#define LIBBASE 0x80000000
-#define LIBLAST 0x90000000
-#define LIBINC  0x00100000
-#endif
 
 #ifdef ANDROID_ARM_LINKER
 
