@@ -640,7 +640,7 @@ DEFAULT_MMAP_THRESHOLD       default: 256K
 
 /* #define HAVE_USR_INCLUDE_MALLOC_H */
 
-#if !ANDROID
+#ifndef __BIONIC__
 #ifdef HAVE_USR_INCLUDE_MALLOC_H
 #include "/usr/include/malloc.h"
 #else /* HAVE_USR_INCLUDE_MALLOC_H */
